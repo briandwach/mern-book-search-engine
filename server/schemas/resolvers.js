@@ -1,9 +1,10 @@
 const { User } = require('../models');
+const { methods } = require('../models/Book');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-     getSingleUser: async (parent, { user = null, params }) => {
+     me: async (parent, { user = null, params }) => {
       return User.findOne({
         $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
       });
